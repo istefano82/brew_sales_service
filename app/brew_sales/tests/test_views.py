@@ -22,6 +22,7 @@ class BrewAuthApiUnittest(APITestCase):
     @mock.patch("brew_sales.views.requests", autospec=True)
     def test_get_total_sales_amount(self, mock_requests):
         """It should be possible to get total sales amount"""
+        mock_requests.post.return_value = mock.MagicMock(status_code=200)
         base_url = '/api/v0/brew_sales/sales_item/'
         response = self.client.get(base_url + 'total_sales/')
         self.assertEqual({'total_sales': 0}, json.loads(response.content))
